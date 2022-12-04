@@ -6,12 +6,17 @@
 //Constructor sets the reference phrase
 tappity::tappity(std::string reference)
 {
+  ref = reference;
+  inp = "";
+  
 }
 
 //Provide the input to be compared to the reference. Before this 
 //function is called, the input should be considered an empty string
 void tappity::entry(std::string input)
 {
+  inp = input;
+  return;
 }
 
 //Compares the length of the reference to that of the input and
@@ -19,7 +24,14 @@ void tappity::entry(std::string input)
 //same length
 int tappity::length_difference()
 {
-  return 0;
+  if(inp.length() > ref.length()){
+    return (inp.length()-ref.length());
+  }
+  else if(inp.length() < ref.length()){
+    return (ref.length() - inp.length());
+  }
+  else
+    return 0;
 }
 
 //Compares the content of the reference to that of the input and
@@ -36,5 +48,31 @@ int tappity::length_difference()
 //locations in another string that has 16 characters, the accuracy is 50.
 double tappity::accuracy()
 {
-  return 0;
+  double difference = 0; 
+  if(inp.length() > ref.length()){
+    for(int i = 0; i<ref.length(); i++){
+      if(inp[i] != ref[i]){
+        difference++;
+      }
+    }
+    difference = difference + inp.length() - ref.length();
+    return ((inp.length()-difference)/inp.length())*100;
+  }
+  else if(inp.length() < ref.length()){
+    for(int i = 0; i<inp.length(); i++){
+      if(inp[i] != ref[i]){
+        difference++;
+      }
+    }
+    difference = difference + ref.length() - inp.length();
+    return ((ref.length()-difference)/ref.length())*100;
+  }
+  else{
+    for(int i = 0; i<inp.length(); i++){
+      if(inp[i] != ref[i]){
+        difference++;
+      }
+    }
+    return ((inp.length()-difference)/inp.length())*100;
+  }
 }
