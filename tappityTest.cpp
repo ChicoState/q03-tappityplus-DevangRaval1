@@ -147,3 +147,15 @@ TEST(tappity, accuracy_inputNull){
 	tap.entry(input);
 	ASSERT_EQ(0, tap.accuracy());
 }
+TEST(tappity, accuracy_specialCharactersInInput){
+	tappity tap("HelloWorl");
+	string input = "Hello Worl";
+	tap.entry(input);
+	ASSERT_EQ(50,tap.accuracy());
+}
+TEST(tappity, accuracy_specialCharactersInCons){
+	tappity tap("Hello Worl");
+	string input = "HelloWorl";
+	tap.entry(input);
+	ASSERT_EQ(50,tap.accuracy());
+}
