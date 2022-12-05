@@ -53,15 +53,39 @@ TEST(tappity, length_difference_DiffLen_InpLarger_SimiStr){
 }
 TEST(tappity, length_difference_DiffLen_InpLarger_DiffStr){
 	tappity tap("Hello World");
-	string input = "ABCDEFGHIJKLM";
+	string input = "ABCDE GHIJKLM";
 	tap.entry(input);
 	ASSERT_EQ(2, tap.length_difference());
 }
 TEST(tappity, length_difference_DiffLen_InpSmaller_DiffStr){
 	tappity tap("Hello World");
-	string input = "ABCDEFGH";
+	string input = "ABC EFGH";
 	tap.entry(input);
 	ASSERT_EQ(3, tap.length_difference());
+}
+TEST(tappity, length_difference_constructorNull){
+	tappity tap("");
+	string input = "HelloWorld";
+	tap.entry(input);
+	ASSERT_EQ(10, tap.length_difference());
+}
+TEST(tappity, length_difference_inputNull){
+	tappity tap("HelloWorld");
+	string input = "";
+	tap.entry(input);
+	ASSERT_EQ(10, tap.length_difference());
+}
+TEST(tappity, length_difference_specialCharactersInCons){
+	tappity tap("Hello World");
+	string input = "HelloWorld";
+	tap.entry(input);
+	ASSERT_EQ(1,tap.length_difference());
+}
+TEST(tappity, length_difference_specialCharactersInInput){
+	tappity tap("HelloWorld");
+	string input = "Hello World";
+	tap.entry(input);
+	ASSERT_EQ(1,tap.length_difference());
 }
 TEST(tappity, accuracy_SameStr){
 	tappity tap("HelloWorld");
@@ -110,4 +134,16 @@ TEST(tappity, accuracy_LargerInp_DiffStr){
 	string input = "mynameisdd";
 	tap.entry(input);
 	ASSERT_EQ(10, tap.accuracy());
+}
+TEST(tappity, accuracy_constructorNull){
+	tappity tap("");
+	string input = "HelloWorld";
+	tap.entry(input);
+	ASSERT_EQ(0, tap.accuracy());
+}
+TEST(tappity, accuracy_inputNull){
+	tappity tap("HelloWorld");
+	string input = "";
+	tap.entry(input);
+	ASSERT_EQ(0, tap.accuracy());
 }
